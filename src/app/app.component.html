@@ -1,0 +1,42 @@
+<div class="container shadow">
+  <div class="row">
+    <h1 class="text-center">PAGINATION</h1>
+    <div class="col-12">
+
+      <!-- Pagination 2 -->
+      <select (change)="onTable_size_change($event)" class="alert border p-2 bg_light_blue text-light">
+        <option *ngFor="let size of pagination.table_sizes">
+          {{size}}
+        </option>
+      </select>
+
+      <table class="table table-stripe shadow-sm border">
+        <thead class="bg_light_blue text-light border ">
+          <tr>
+            <th>Sl. No.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users | paginate:{
+            itemsPerPage : pagination.table_size,
+            currentPage : pagination.page,
+            totalItems : pagination.count
+          } ; let i=index ">
+            <td class="border">{{i+1}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.address.street}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination 1 -->
+      <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTable_data_change($event)"></pagination-controls>
+      
+
+    </div>
+  </div>
+</div>
